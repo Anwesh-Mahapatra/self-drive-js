@@ -25,7 +25,7 @@ class Controls{
                     break;
            }
            //This is for debugging purpose
-           console.log(this);
+        //    console.log(this);
         }
         document.onkeyup=(event)=>{
             switch(event.key){
@@ -42,7 +42,7 @@ class Controls{
                      this.reverse = false;
                      break;
             }
-            console.log(this);
+            // console.log(this);
          }
     }
 }
