@@ -9,7 +9,7 @@ class Car{
        //Adding physics to the car
         this.accleration = 0.2;
         this.speed = 0;
-        this.maxSpeed = 3.5;
+        this.maxSpeed = 3;
         this.friction = 0.05;
         this.angle = 0;
     }
@@ -65,15 +65,29 @@ class Car{
         }
         //Implementing the left and the right controls
         //And fixing the maxSpeed issue when we turn left or right
-        if(this.controls.left){
-            // this.x-=2;
-            this.angle += 0.03;
-        }
-        if(this.controls.right){
-            //this.x+=2;
-            this.angle-=0.03;
+        // if(this.controls.left){
+        //     // this.x-=2;
+        //     this.angle += 0.03;
+        // }
+        // if(this.controls.right){
+        //     //this.x+=2;
+        //     this.angle-=0.03;
+        // }
+
+        //To make the left and right turns more like a real car
+        if(this.speed!=0){
+            const flip = this.speed>0?1:-1;
+            if(this.controls.left){
+                this.angle+=0.03*flip;
+            }
+            if(this.controls.right){
+                this.angle-=0.03*flip;
+            }
         }
 
-        this.y-=this.speed;
+        //To make the car move sideways
+        this.x-=Math.sin(this.angle)*this.speed;
+        this.y-=Math.cos(this.angle)*this.speed;
+        // this.y-=this.speed;
     }
 }
