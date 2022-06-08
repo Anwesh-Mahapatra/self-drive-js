@@ -5,6 +5,7 @@ canavas.width = 200;
 
 //To draw on the canvas we need to get context
 const ctx = canavas.getContext("2d");
+const road = new Road(canavas.width/2,canavas.width*0.9);
 //Creating the car object
 const car = new Car(100,100,30,50);
 car.draw(ctx);
@@ -15,6 +16,7 @@ animate();
 function animate(){
     car.update();
     canavas.height = window.innerHeight;
+    road.draw(ctx);
     car.draw(ctx);
     requestAnimationFrame(animate);
 }
