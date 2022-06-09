@@ -7,7 +7,7 @@ canavas.width = 200;
 const ctx = canavas.getContext("2d");
 const road = new Road(canavas.width/2,canavas.width*0.9);
 //Creating the car object
-const car = new Car(100,100,30,50);
+const car = new Car(road.getLaneCenter(3),100,30,50);
 car.draw(ctx);
 
 //To bring draw() and update() together
