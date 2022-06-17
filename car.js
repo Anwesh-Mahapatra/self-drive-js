@@ -3,7 +3,8 @@ class Car{
        this.x = x;
        this.y = y;
        this.width = width;
-       this.height = height; 
+       this.height = height;
+       this.sensor = new Sensor(this);
        this.controls = new Controls();
        
        //Adding physics to the car
@@ -13,27 +14,9 @@ class Car{
         this.friction = 0.05;
         this.angle = 0;
     }
-    //Now we draw the car. First we call beginPath() to start a new path by emptying the list of sub-paths
-    draw(ctx){
-        //To create rotation for left and right turn
-        ctx.save();
-        ctx.translate(this.x,this.y);
-        ctx.rotate(-this.angle);
-        ctx.beginPath();
-        //After translating the x and y we can remove the hardcoded x and y
-        ctx.rect(
-        // this.x-this.width/2,
-        // this.y-this.height/2,
-           -this.width/2,
-           -this.height/2,
-           this.width,
-           this.height
-        );
-        ctx.fill();
-        ctx.restore();
-    }
     update(){
         this.#move();
+        this.sensor.update();
     }
     #move(){
                 //In browser to go down, decrease y-axis
@@ -93,4 +76,24 @@ class Car{
                 this.y-=Math.cos(this.angle)*this.speed;
                 // this.y-=this.speed;
     }
+        //Now we draw the car. First we call beginPath() to start a new path by emptying the list of sub-paths
+        draw(ctx){
+            //To create rotation for left and right turn
+            ctx.save();
+            ctx.translate(this.x,this.y);
+            ctx.rotate(-this.angle);
+            ctx.beginPath();
+            //After translating the x and y we can remove the hardcoded x and y
+            ctx.rect(
+            // this.x-this.width/2,
+            // this.y-this.height/2,
+               -this.width/2,
+               -this.height/2,
+               this.width,
+               this.height
+            );
+            ctx.fill();
+            ctx.restore();
+            this.sensor.draw(ctx);
+        }
 }
