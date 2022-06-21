@@ -1,20 +1,24 @@
 class Sensor{
     constructor(car){
        this.car = car;
-       this.rayCount = 3;
+       this.rayCount = 26;
        this.rayLength = 100;
-       this.raySpread = Math.PI/4;
+       this.raySpread = Math.PI/1.5;
        //Keeps the rays after we create them
        this.rays=[];
     }
     update(){
+        this.#castRays();
+    }
+    
+    #castRays(){
         this.rays=[];
         for(let i=0;i<this.rayCount;i++){
             const rayAngle = lerp(
                 this.raySpread/2,
                 -this.raySpread/2,
-                i/(this.rayCount-1)
-            );
+                this.rayCount==1?0.5:i/(this.rayCount-1)
+            )+this.car.angle;
             //Calculate the start and the end point for the rays
             const start = {x:this.car.x, y:this.car.y};
             const end = {
